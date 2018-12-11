@@ -1,0 +1,15 @@
+body{ font-size:12px;}
+body,p,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd{ margin:0; padding:0;}
+h1,h2,h3,h4,h5,h6{ font-weight:normal; font-size:12px;}
+a{ text-decoration:none; color:#000; }
+strong,b{ font-weight:normal;}
+em,i{ font-style:normal;}
+img{ vertical-align:middle;border:none;}
+/*消除图片的下间距，消除图片在IE里面出现的边框*/
+li{ list-style:none;}
+.clearfix:after{
+    content:'';
+    display:block;
+    clear:both;
+    overflow:hidden;
+}
