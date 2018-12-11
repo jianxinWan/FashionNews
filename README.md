@@ -1,30 +1,7 @@
-# fashion
+# FashionNews
 
-> A Vue.js project
+大三`web`作业，基于`vue2.0`实现的一个移动端新闻网站，主要实现新闻展示，新闻点赞，评论，用户登陆注册等功能，项目使用到`Element-iu`组件库，通过`vue-cli`进行网页开发。
 
-## Build Setup
+## 在线地址
 
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-
-# run unit tests
-npm run unit
-
-# run e2e tests
-npm run e2e
-
-# run all tests
-npm test
-```
-
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+[还没上线](http://www.wvue.com.cn/NBA/)
