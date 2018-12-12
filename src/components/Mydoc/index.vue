@@ -3,7 +3,7 @@
         <div class="mydoc-header-link">
             <div class="return-icon">
                 <router-link to="/home" tag = 'div'>
-                    <i class="w-icon-back"></i>
+                    <i class="el-icon-arrow-left"></i>
                 </router-link>   
             </div>
         </div>

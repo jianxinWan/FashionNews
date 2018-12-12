@@ -1,18 +1,18 @@
 <template>
     <div class = "item-warp"> 
         <h2>
-            {{title}}
+            {{newInfo.title}}
         </h2>
-        <div class="pic-warp" v-show="picture">
-            <img :src='picture'/>
+        <div class="pic-warp" v-show="newInfo.pic">
+            <img :src="newInfo.pic? newInfo.pic.trim() : '' "/>
         </div>
         <div class="intro-warp">
-            <span>2018马上都要结束了，再不回答就没机会了。我来介绍一个真正意义上2018年（8月）刚刚出炉的优秀App：</span>
+            <span v-html="newInfo.introduction"></span>
         </div>
         <div class="fun-warp">
-            <span class="btn">赞同7.5k</span>
-            <span class="btn">评论2.5k</span>
-            <span class="btn">收藏</span>
+            <span class="btn">赞同</span>
+            <span class="btn">评论<i class="el-icon-document"></i>{{newInfo.commentList.length}}</span>
+            <span class="btn">收藏<i class="el-icon-star-on"></i></span>
         </div>
     </div>
 </template>
@@ -21,13 +21,20 @@
     export default {
         data(){
             return {
-                title:'为什么现在的男生都不怎么主动追女生了？',
-                picture:"https://pic4.zhimg.com/50/v2-70e1ae96183d6924507a440b54336d56_400x224.jpg",
-                intro:"2018马上都要结束了，再不回答就没机会了。我来介绍一个真正意义上2018年（8月）刚刚出炉的优秀App"
+                imgFlag:true
             }
         },
-        components:{
-
+        props:{
+            newInfo:{
+                type:Object,
+                default:function(){
+                    return [] 
+                }
+            }
+        },
+        methods:{
+        },
+        mounted () {
         }
     }
 </script>
