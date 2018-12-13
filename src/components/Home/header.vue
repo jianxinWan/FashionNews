@@ -1,7 +1,9 @@
 <template>
   <div class="header-warp">
     <span class="title">
-      今日看点
+      <router-link to="/home" tag="span">
+        今日看点
+      </router-link>
     </span>
     <span class="icon-warp">
       <router-link to="/mydoc" tag="div" v-if="loginFlag">
@@ -37,6 +39,20 @@
       return {
         loginFlag:false
       }
+    },
+    methods:{
+      checkLogin(){
+        let token = localStorage.getItem('token');
+        let userInfo = localStorage.getItem("userInfo");
+        if(token&&userInfo){
+          this.loginFlag = true;
+        }else{
+          this.loginFlag = false;
+        }
+      }
+    },
+    mounted(){
+      this.checkLogin();
     }
   }
 </script>

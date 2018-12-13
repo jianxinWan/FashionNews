@@ -64,8 +64,6 @@ export default {
         if (value === '') {
           callback(new Error('验证码不能为空'));
         }else{
-          console.log(value);
-          this.getEmailCode(value);
           callback();
         }
       };
@@ -116,22 +114,50 @@ export default {
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            alert('submit!');
+            this.signUp();
           } else {
             return false;
           }
         });
       },
       signUp:function(){
-         axios.post('http://118.89.221.170:8080/news/user/vercode', {
-            userEmail: this.ruleForm2.email
+        let signUpUrl = 'http://118.89.221.170:8080/news/user/register/'+this.ruleForm2.code;
+         axios({
+          method: 'post',
+          url:signUpUrl,
+          data:{
+            userEmail: this.ruleForm2.email,
+            userPw : this.ruleForm2.pass
+          },
+          withCredentials: true
+        }).then(function(res){
+            if(res.success){
+              this.$notify({
+                title: '注册成功',
+                message:'恭喜你已注册成功！',
+                type: 'success'
+              });
+            }else{
+              this.$notify({
+                title: '注册失败',
+                message:'请检查你的邮箱和验证码！',
+                type: 'error'
+              });
+            }
+          }.bind(this)).catch((err)=>{
+            console.log(err);
           })
       },
       getEmailCode:function(){
         if(this.emailFlag){
           console.log("get-code");
-          axios.post('http://118.89.221.170:8080/news/user/vercode', {
-            userEmail: this.ruleForm2.email
+          axios({
+            method:'post',
+            url:'http://118.89.221.170:8080/news/user/vercode',
+            data:{
+              userEmail: this.ruleForm2.email,
+            },
+            withCredentials: true
           })
           .then(function (response) {
             this.$notify({

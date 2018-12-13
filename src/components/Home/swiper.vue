@@ -1,12 +1,11 @@
 <template>
-    <div v-loading="loading">
-        <div class="block">
-            <el-carousel height="56vw">
-                <el-carousel-item v-for="item in imgList" :key="item">
-                    <img :src="item" width="100%" height="auto" />
-                </el-carousel-item>
-            </el-carousel>
-        </div>
+    <div>
+        <el-carousel height="51.6vw">
+            <el-carousel-item v-for="(item,index) in imgList" :key="index">
+                <img :src="item.imgSrc" width="100%" height="auto" />
+                <h2>{{item.tit}}</h2>
+            </el-carousel-item>
+        </el-carousel>
     </div>
 </template> 
 <script>
@@ -14,29 +13,42 @@ export default{
     data(){
         return{
             imgList:[
-                'https://pic3.zhimg.com/v2-bf6de60f5e7f66ac9ef74cdf19892ec6_200x112.jpeg',
-                'https://pic1.zhimg.com/v2-92aa5aa57bd737bac9730e2d85ad3920_200x112.jpeg',
-                'https://pic4.zhimg.com/50/v2-240bc2222c1092f9c8c3a66f569a50ca_400x224.jpg',
-                'https://pic2.zhimg.com/50/v2-c6ec2f9d5d9532e93ff6a052e49323a2_400x224.jpg'
+                {
+                    tit:'欧冠16强尘埃落定！皇马遭中央陆军双杀 尤文输球仍小组头名',
+                    imgSrc:'https://p9.pstatp.com/origin/db0200020757bea71014'
+                },
+                {
+                    tit:'孟晚舟16项保释条件曝光 明年1月无引渡申请将直接重获自由',
+                    imgSrc:'https://p99.pstatp.com/origin/dad4000c79d6152fc503'
+                },
+                {
+                    tit:'小周周身高齐腰周杰伦！林俊杰感叹长好快！',
+                    imgSrc:'https://p99.pstatp.com/origin/da740001b925b62d753c'
+                },
+                {
+                    tit:'颖儿生日晒全家福，付辛博“千里跋涉”为老婆庆生超甜蜜',
+                    imgSrc:'https://p9.pstatp.com/origin/daab00048491f02f33eb'
+                }
             ]
         }
     }
 }
 </script>
 <style>
-  .el-carousel__item h3 {
-    color: #475669;
-    font-size: 14px;
-    opacity: 0.75;
-    line-height: 150px;
-    margin: 0;
+  .el-carousel__item h2 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    color: white;
+    font-weight: 700;
+    font-size: 1.05rem;
+    padding: 0 0.5rem 0.5rem 0.5rem;
+    background: -webkit-linear-gradient(#666,#333); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(#666,#333); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(#666,#333); /* Firefox 3.6 - 15 */
+    background-color: linear-gradient(#666,#333);
   }
-
-  .el-carousel__item:nth-child(2n) {
-     background-color: #99a9bf;
-  }
-  
-  .el-carousel__item:nth-child(2n+1) {
-     background-color: #d3dce6;
+  .el-carousel__indicators{
+      display: none;
   }
 </style>

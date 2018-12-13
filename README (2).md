@@ -10,7 +10,7 @@
                 若邮件系统发送成功，返回{"success": "请求成功", "email": email}
                 其他：返回{"failure": "请求失败"}
                 
-##### 2. 验证验证码是否正确 URL:http://118.89.221.170:8080/news/user/matchcode/{vercode}
+##### 2.(已废弃) 验证验证码是否正确 URL:http://118.89.221.170:8080/news/user/matchcode/{vercode} 
             得到验证码之后，发送到后端，与生成验证码进行比较
             
             {vercode}:RESTful路径，将前端输入的验证码放入路径
@@ -21,10 +21,12 @@
                 若匹配成功，返回{"success": "匹配成功"}
                 若匹配失败，返回{"failure"： "匹配失败"}
                 
-##### 3. 注册： URL:http://118.89.221.170:8080/news/user/register
+##### 3.(2.0版本重新制定) 注册： URL:http://118.89.221.170:8080/news/user/register/{vercode}
             输入密码，前端验证合法性后进行注册
             
-            请求参数： userPw
+            {vercode}:RESTful路径，将前端输入的验证码放入路径
+            
+            请求参数： userEmail & userPw 
             
             返回值（json数组）：
                 若注册成功，返回{"success"： "注册成功"}
@@ -59,6 +61,20 @@
             返回值（json数组形式）：
                 若操作失败，返回{"failure"： "修改错误"}
                 若操作成功，返回{"success", "修改成功}
+                
+##### 7. 退出注销： URL:http://118.89.221.170:8080/news/user/quit **(NEWS-2.0)
+            退出清除session
+            
+            返回值（json数组）：
+                若操作成功，返回{"success", "退出"}
+                若操作失败，返回{"failure", "退出失败"}
+                
+##### 8. 给用户关注：URL:http://118.89.221.170:8080/news/user/makeFollowOn **(NEWS-2.0)
+             给用户关注，使自己关注+1，被关注的人粉丝+1
+             
+             请求参数（json数组）：
+                若操作异常，返回{"failure", e.getMessage()}
+                若操作成功，返回{"success", "操作成功"}
                 
 ##### 附录：User
             //用户id
@@ -124,7 +140,27 @@
                 若添加失败，返回{"failure"； e.getMessage()}
                 若添加成功，返回{"success": "操作成功"}
                 
+##### 5. 通过新闻id查询新闻详情： URL:http://118.89.221.170:8080/news/new/detailWith/{type}/{newsId} **(NEWS-2.0)
+            通过新闻id查询新闻的详情
+            
+            {type}：同上
+            {newsId}：新闻id
+            
+            返回值（json数组）：
+                若添加成功，返回{"success"： "操作成功"， "data": news, "timer", System.currentTimeMillis()}
+                其他： 返回{"failure", e.getMessage()}
                 
+##### 6. 给新闻点赞 URL:http://118.89.221.170:8080/news/new/addNewsIden/{type}/{newsId}  **(NEWS-2.0)
+            点赞新闻
+            
+            {type}：同上
+            {newsId}：新闻id
+            
+            返回值（json数组）：
+                若添加成功，返回{"success"： "操作成功"}
+                
+                其他： 返回{"failure", e.getMessage()}
+
 ##### 附录A：News
             //新闻id
             private Integer id;

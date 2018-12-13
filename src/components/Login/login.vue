@@ -39,6 +39,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+import { setTimeout } from 'timers';
 export default {
    data(){
       var checkEmail = (rule, value, callback) => {
@@ -64,7 +66,6 @@ export default {
       return {
         ruleForm2: {
           pass: '',
-          checkPass: '',
           email: ''
         },
         rules2: {
@@ -78,10 +79,50 @@ export default {
       };
     },
     methods: {
+      login:function(){
+        axios({
+          method:'post',
+          url:'http://118.89.221.170:8080/news/user/login',
+          data:{
+            userEmail:this.ruleForm2.email,
+            userPw:this.ruleForm2.pass
+          },
+          withCredentials:true
+        }).then(function(res){
+          if(res.data.success){
+            this.$notify({
+              title: '登录成功',
+              message:'登录成功！',
+              type: 'success'
+            });
+            //存储token信息
+            localStorage.setItem("token",res.data.token);
+            localStorage.setItem("userInfo",JSON.stringify(res.data.userInfo));
+            setTimeout(()=>{
+              this.$router.push({ name: 'mydoc'});
+            },1500)
+          }else{
+            this.$notify({
+              title: '注册失败',
+              message:'账户不存在或密码错误',
+              type: 'error'
+            });
+          }
+        }.bind(this)).catch(function(err){
+          this.$notify({
+            title: '注册失败',
+            message:'通信错误！',
+            type: 'error'
+          });
+          this.ruleForm2.email = '';
+          this.ruleForm2.pass = '';
+        }.bind(this))
+      },
       submitForm(formName) {
+        var that = this;
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            alert('submit!');
+            that.login();
           } else {
             return false;
           }

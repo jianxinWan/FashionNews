@@ -1,10 +1,12 @@
 <template>
-    <div 
-        v-loading="loading"
+    <div
         class="news"
+        v-loading="loading"
     >
         <div v-for="(item,index) in newArray" :key="index">
-            <newItem :newInfo="item" />
+            <router-link :to="{name:'detail',params:{id:item.id}}" tag="a" >
+                <newItem :newInfo="item" />
+            </router-link>
         </div>
     </div>
 </template>
@@ -44,7 +46,7 @@
 <style scoped>
 .news{
     width: 100%;
-    flex: 1;
+    min-height: 200px;
 }
 .el-icon-loading{
     font-size: 2rem;
